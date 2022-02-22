@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Ecomindo_D1.bll</RootNamespace>
+    <RootNamespace>Ecomindo_D1.dal</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ecomindo-D1.dal\Ecomindo-D1.dal.csproj" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

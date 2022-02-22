@@ -1,0 +1,12 @@
+{
+  {
+    "idMenu": 1,
+    "namaMenu": "Bakso",
+    "hargaMenu": 15000
+  },
+  {
+    "idMenu": 2,
+    "namaMenu": "Rendang",
+    "hargaMenu": 12000
+  }
+}
