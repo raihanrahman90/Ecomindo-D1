@@ -19,20 +19,23 @@ namespace Ecomindo_D1.Controllers
     {
         private readonly ILogger<MenuController> _logger;
         private UnitOfWork unitOfWork;
-        public MenuController(ILogger<MenuController> logger, UnitOfWork unitOfWork )
+        private IMapper _mapper;
+        public MenuController(ILogger<MenuController> logger, UnitOfWork unitOfWork, IMapper mapper )
         {
             this.unitOfWork = unitOfWork;
             _logger = logger;
+            _mapper = mapper;
         }
         [HttpGet]
         [ProducesResponseType(typeof(ListMenuDTO), 200)]
         [ProducesResponseType(typeof(string), 400)]
         public async Task<ListMenuDTO> GetAllMenu()
         {
-            var allMenu = await this.unitOfWork.MenuRepository.GetAll().Select(x=>new MenuDTO {idMenu=x.idMenu, namaMenu=x.namaMenu, hargaMenu=x.hargaMenu}).ToListAsync();
+            var allMenu = this.unitOfWork.MenuRepository.GetAll();
+            var hasil = await allMenu.ProjectTo<MenuDTO>(_mapper.ConfigurationProvider).ToListAsync();
             var result = new ListMenuDTO
             {
-                listMenu = allMenu
+                listMenu = hasil
             };
             return result;
         }
@@ -43,13 +46,9 @@ namespace Ecomindo_D1.Controllers
         {
             try
             {
-                var isExist = unitOfWork.MenuRepository.GetAll().Where(x => x.idMenu == menuDTO.idMenu).Any();
-                if (!isExist)
-                {
-                    var menu = new Menu {hargaMenu=menuDTO.hargaMenu, namaMenu=menuDTO.namaMenu};
-                    await unitOfWork.MenuRepository.AddAsync(menu);
-                    await unitOfWork.SaveAsync();
-                }
+                var menu = _mapper.Map<Menu>(menuDTO);
+                await unitOfWork.MenuRepository.AddAsync(menu);
+                await unitOfWork.SaveAsync();
                 return new OkResult();
             }
             catch (Exception)
@@ -67,7 +66,7 @@ namespace Ecomindo_D1.Controllers
             try
             {
                 var menu= await unitOfWork.MenuRepository.GetByIdAsync(id);
-                var hasil = new MenuDTO { idMenu = menu.idMenu, namaMenu = menu.namaMenu, hargaMenu = menu.hargaMenu };
+                var hasil = _mapper.Map<MenuDTO>(menu);
                 return hasil;
             }
             catch (Exception)   

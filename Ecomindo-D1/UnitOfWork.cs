@@ -19,6 +19,7 @@ namespace Ecomindo_D1
         {
             dbContext = context;
             MenuRepository = new MenuRepository(context);
+            RestaurantRepository = new RestaurantRepository(context);
         }
         public void Save()
         {
