@@ -5,8 +5,4 @@
     <RootNamespace>Ecomindo_D1.bll</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Ecomindo-D1.dal\Ecomindo-D1.dal.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Ecomindo_D1.bll;
-using Ecomindo_D1.dal.Model;
+using Ecomindo_D1.Model;
 using Ecomindo_D1.Controllers.Menu.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,8 +23,8 @@ namespace Ecomindo_D1.Controllers.Menu
             this.menuService = new MenuService();
             MapperConfiguration config = new MapperConfiguration(m =>
             {
-                m.CreateMap<MenuDTO, Ecomindo_D1.dal.Model.Menu>();
-                m.CreateMap<Ecomindo_D1.dal.Model.Menu, MenuDTO>();
+                m.CreateMap<MenuDTO, Ecomindo_D1.Model.Menu>();
+                m.CreateMap<Ecomindo_D1.Model.Menu, MenuDTO>();
             });
             _logger = logger;
         }
@@ -47,7 +47,7 @@ namespace Ecomindo_D1.Controllers.Menu
         {
             try
             {
-                var hasil = this.menuService.insert(menuDTO.idMenu, menuDTO.namaMenu, menuDTO.hargaMenu);
+                var hasil = this.menuService.insert(menuDTO.namaMenu, menuDTO.hargaMenu);
                 if (hasil != true) return new BadRequestResult();
                 return new OkResult();
             }

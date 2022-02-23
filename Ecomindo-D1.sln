@@ -5,11 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecomindo-D1", "Ecomindo-D1\Ecomindo-D1.csproj", "{653CC8B2-7297-417E-BD1F-6D0776FBEF7A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecomindo-D1.bll", "Ecomindo-D1.bll\Ecomindo-D1.bll.csproj", "{191EA519-911A-4217-B744-F6316F87CC39}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecomindo-D1.bll.test", "Ecomindo-D1.bll.test\Ecomindo-D1.bll.test.csproj", "{FF952BB8-88D5-4D2C-A9C5-65A26C9C6A61}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecomindo-D1.dal", "Ecomindo-D1.dal\Ecomindo-D1.dal.csproj", "{9BBF897E-8BCD-4151-AD37-029B5D563160}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecomindo-D1.bll.test", "Ecomindo-D1.bll.test\Ecomindo-D1.bll.test.csproj", "{FF952BB8-88D5-4D2C-A9C5-65A26C9C6A61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +17,10 @@ Global
 		{653CC8B2-7297-417E-BD1F-6D0776FBEF7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{653CC8B2-7297-417E-BD1F-6D0776FBEF7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{653CC8B2-7297-417E-BD1F-6D0776FBEF7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{191EA519-911A-4217-B744-F6316F87CC39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{191EA519-911A-4217-B744-F6316F87CC39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{191EA519-911A-4217-B744-F6316F87CC39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{191EA519-911A-4217-B744-F6316F87CC39}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF952BB8-88D5-4D2C-A9C5-65A26C9C6A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF952BB8-88D5-4D2C-A9C5-65A26C9C6A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF952BB8-88D5-4D2C-A9C5-65A26C9C6A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF952BB8-88D5-4D2C-A9C5-65A26C9C6A61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BBF897E-8BCD-4151-AD37-029B5D563160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BBF897E-8BCD-4151-AD37-029B5D563160}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BBF897E-8BCD-4151-AD37-029B5D563160}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BBF897E-8BCD-4151-AD37-029B5D563160}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
