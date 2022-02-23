@@ -31,6 +31,7 @@ namespace Ecomindo_D1
             services.AddControllers();
 
             services.AddDbContext<OnBoardingSkdDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<UnitOfWork>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo{ Title = "Tutorial Net Core", Version = "v1" });

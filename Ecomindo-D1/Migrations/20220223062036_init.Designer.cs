@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecomindo_D1.Migrations
 {
     [DbContext(typeof(OnBoardingSkdDbContext))]
-    [Migration("20220223045952_addRestaurant")]
-    partial class addRestaurant
+    [Migration("20220223062036_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
