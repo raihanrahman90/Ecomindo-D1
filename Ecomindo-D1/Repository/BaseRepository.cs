@@ -103,5 +103,6 @@ namespace Ecomindo_D1.Repository
         {
             return GetAll().Any(predicate);
         }
+
     }
 }

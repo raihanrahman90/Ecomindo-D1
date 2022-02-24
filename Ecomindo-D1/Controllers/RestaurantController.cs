@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Ecomindo_D1.DTO;
+using Ecomindo_D1.Interface;
 using Ecomindo_D1.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,22 +18,19 @@ namespace Ecomindo_D1.Controllers
     public class RestaurantController : Controller
     {
 
-        private UnitOfWork _unitOfWork;
         private readonly ILogger<RestaurantController> _logger;
-        private IMapper _mapper;
-        public RestaurantController(ILogger<RestaurantController> logger, UnitOfWork unitOfWork, IMapper mapper) 
+        private readonly IRestaurantService _restaurantService;
+        public RestaurantController(ILogger<RestaurantController> logger, IRestaurantService restaurantService) 
         {
-            _unitOfWork = unitOfWork;
             _logger = logger;
-            _mapper = mapper;
+            _restaurantService = restaurantService;
         }
         [HttpGet]
         [ProducesResponseType(typeof(ListRestaurantDTO), 200)]
         [ProducesResponseType(typeof(string), 400)]
         public async Task<ListRestaurantDTO> getAll()
         {
-            var result = await _unitOfWork.RestaurantRepository.GetAll().ProjectTo<RestaurantDTO>(_mapper.ConfigurationProvider).ToListAsync();
-            var hasil = new ListRestaurantDTO { listRestaurant = result };
+            var hasil = await _restaurantService.getAll();
             return hasil;
         }
 
@@ -42,10 +40,7 @@ namespace Ecomindo_D1.Controllers
         [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> add([FromBody] RestaurantDTO restaurantDTO)
         {
-            var restaurant = _mapper.Map<Restaurant>(restaurantDTO);
-            if (restaurant == null) Console.WriteLine("iini null");
-            await _unitOfWork.RestaurantRepository.AddAsync(restaurant);
-            await _unitOfWork.SaveAsync();
+            var result = await _restaurantService.insert(restaurantDTO);
             return new OkResult();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Ecomindo_D1.Model;
 using Ecomindo_D1.Repository;
+using Ecomindo_D1.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -10,11 +11,12 @@ using System.Threading.Tasks;
 
 namespace Ecomindo_D1
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable, IUnitOfWork
     {
         private readonly OnBoardingSkdDbContext dbContext;
-        public RestaurantRepository RestaurantRepository { get; }
-        public MenuRepository MenuRepository { get; }
+        public IRestaurantRepository RestaurantRepository { get; }
+        public IMenuRepository MenuRepository { get; }
+
         public UnitOfWork(OnBoardingSkdDbContext context)
         {
             dbContext = context;

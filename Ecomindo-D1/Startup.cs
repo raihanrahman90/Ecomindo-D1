@@ -1,4 +1,5 @@
 using Ecomindo_D1.Model;
+using Ecomindo_D1.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Ecomindo_D1.Services;
 
 namespace Ecomindo_D1
 {
@@ -35,7 +37,10 @@ namespace Ecomindo_D1
             services.AddControllers();
 
             services.AddDbContext<OnBoardingSkdDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<UnitOfWork>();
+            services.AddScoped<IRedisService, RedisService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IRestaurantService, RestaurantService>();
+            services.AddScoped<IMenuService, MenuService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo{ Title = "Tutorial Net Core", Version = "v1" });
