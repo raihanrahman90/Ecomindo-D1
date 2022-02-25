@@ -67,7 +67,8 @@ namespace Ecomindo_D1.Services
             try
             {
                 string stringValue = JsonConvert.SerializeObject(value);
-                await RedisDb.StringSetAsync(key, stringValue);
+                TimeSpan exp = TimeSpan.FromSeconds(10);
+                await RedisDb.StringSetAsync(key, stringValue,exp);
             }
             catch (Exception ex)
             {

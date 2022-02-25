@@ -10,6 +10,10 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Ecomindo_D1.Interface;
+using Azure.Messaging.EventHubs.Producer;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Azure.Messaging.EventHubs;
 
 namespace Ecomindo_D1.Services
 {
@@ -19,12 +23,20 @@ namespace Ecomindo_D1.Services
         private IUnitOfWork _unitOfWork;
         private IMapper _mapper;
         private IRedisService _redisService;
-        public MenuService(ILogger<MenuService> logger, IUnitOfWork unitOfWork, IMapper mapper, IRedisService redisService)
+        private IConfiguration _config;
+        public MenuService(
+            ILogger<MenuService> logger, 
+            IUnitOfWork unitOfWork, 
+            IMapper mapper, 
+            IRedisService redisService,
+            IConfiguration config
+        )
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _redisService = redisService;
+            _config = config;
         }
         public async Task<ListMenuDTO> getAll()
         {
@@ -40,14 +52,29 @@ namespace Ecomindo_D1.Services
         {
             try
             {
-                await _unitOfWork.MenuRepository.AddAsync(new Menu { namaMenu = nama, hargaMenu = harga, idRestaurant=idRestaurant });
+                var menu = new Menu { namaMenu = nama, hargaMenu = harga, idRestaurant = idRestaurant };
+                var menuDTO = _mapper.Map<MenuDTO>(menu);
+                await _unitOfWork.MenuRepository.AddAsync(menu);
                 await _unitOfWork.SaveAsync();
+                await SendMenuToEventHub(menuDTO, menu);
                 return true;
             }
             catch (Exception)
             {
                 return false;
             }
+        }
+        private async Task SendMenuToEventHub(MenuDTO menuDTO, Menu menu)
+        {
+            string connString = _config.GetValue<string>("EventHub:ConnectionString");
+            string topic = _config.GetValue<string>("EventHub:EventHubNameTest");
+
+            await using var publisher = new EventHubProducerClient(connString, topic);
+            using var eventBatch = await publisher.CreateBatchAsync();
+            var message = JsonConvert.SerializeObject(menu);
+            eventBatch.TryAdd(new EventData(new BinaryData(message)));
+            eventBatch.TryAdd(new EventData(new BinaryData(menuDTO)));
+            await publisher.SendAsync(eventBatch);
         }
         public async Task<MenuDTO> GetOne(Guid id)
         {

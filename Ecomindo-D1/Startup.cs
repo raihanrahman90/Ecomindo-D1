@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Ecomindo_D1.Services;
+using Ecomindo_D1.Job;
 
 namespace Ecomindo_D1
 {
@@ -41,6 +42,15 @@ namespace Ecomindo_D1
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IRestaurantService, RestaurantService>();
             services.AddScoped<IMenuService, MenuService>();
+
+            services.AddHostedService<MenuMessageListener>();
+
+            services.AddTransient<LogTimeJob>();
+            services.AddTransient<QuartzJobFactory>();
+
+
+            services.AddSingleton<ISchedulerService, SchedulerService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo{ Title = "Tutorial Net Core", Version = "v1" });
@@ -70,6 +80,10 @@ namespace Ecomindo_D1
             {
                 c.SwaggerEndpoint("v1/swagger.json", "Tutorial Net Core v1");
             });
+
+            var schedulerService = app.ApplicationServices.GetRequiredService<ISchedulerService>();
+            schedulerService.Initialize();
+            schedulerService.Start();
         }
     }
 }
