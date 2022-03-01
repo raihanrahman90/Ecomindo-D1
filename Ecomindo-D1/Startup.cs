@@ -51,6 +51,7 @@ namespace Ecomindo_D1
 
             services.AddSingleton<ISchedulerService, SchedulerService>();
 
+            services.AddApplicationInsightsTelemetry();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo{ Title = "Tutorial Net Core", Version = "v1" });

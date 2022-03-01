@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace Ecomindo_D1.bll.test
+namespace Ecomindo_Test
 {
     public class UnitTest1
     {

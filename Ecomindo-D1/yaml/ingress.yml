@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dotnet
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: dotnet
+            port:
+              number: 80
+status:
+  loadBalancer:
+    ingress:
+    - ip: 20.44.223.129

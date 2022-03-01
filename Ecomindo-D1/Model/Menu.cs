@@ -12,8 +12,9 @@ namespace Ecomindo_D1.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid idMenu { get; set; }
-        public Restaurant Restaurant { get; set; }
         public Guid idRestaurant { get; set; }
+        [ForeignKey("idRestaurant")]
+        public Restaurant Restaurant { get; set; }
         public string namaMenu { get; set; }
         public int hargaMenu { get; set; }
     }

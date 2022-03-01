@@ -1,0 +1,27 @@
+[
+  {
+    "menus": [
+      {
+        "namaMenu": "Bakso Sapi",
+        "hargaMenu": "15000"
+      },
+      {
+        "namaMenu": "Bakso Ayam",
+        "hargaMenu": "15000"
+      }
+    ],
+    "idRestaurant": "311b848d-00ae-443e-5e85-08d946c2256c",
+    "namaRestaurant": "Restaurant Sapi"
+  },
+  {
+    "menus": [
+    ],
+    "idRestaurant": "311b848d-00ae-443e-5e85-08d946c2256a",
+    "namaRestaurant": "Restaurant Ikan"
+  },
+  {
+    "menus": [],
+    "idRestaurant": "311b848d-00ae-443e-5e85-08d946c2256b",
+    "namaRestaurant": "Restaurant Ayam"
+  }
+]

@@ -20,5 +20,6 @@ namespace Ecomindo_D1.Interface
         IQueryable<T> GetAll();
         IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties);
         IQueryable<T> GetMany(Expression<Func<T, bool>> where);
+        bool IsExist(Expression<Func<T, bool>> predicate);
     }
 }

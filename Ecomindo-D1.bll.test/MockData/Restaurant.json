@@ -1,0 +1,14 @@
+[
+  {
+    "idRestaurant": "311b848d-00ae-443e-5e85-08d946c2256a",
+    "namaRestaurant": "Restaurant Ikan"
+  },
+  {
+    "idRestaurant": "311b848d-00ae-443e-5e85-08d946c2256b",
+    "namaRestaurant": "Restaurant Ayam"
+  },
+  {
+    "idRestaurant": "311b848d-00ae-443e-5e85-08d946c2256c",
+    "namaRestaurant": "Restaurant Sapi"
+  }
+]

@@ -28,13 +28,29 @@ namespace Ecomindo_D1.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ListRestaurantDTO), 200)]
         [ProducesResponseType(typeof(string), 400)]
-        public async Task<ListRestaurantDTO> getAll()
+        public async Task<List<RestaurantWithMenusDTO>> getAll()
         {
             var hasil = await _restaurantService.getAll();
             return hasil;
         }
 
 
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(MenuDTO), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        public async Task<RestaurantDTO> GetOne([FromRoute] Guid id)
+        {
+            try
+            {
+                var hasil = await _restaurantService.GetOne(id);
+                return hasil;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         [HttpPost]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 400)]

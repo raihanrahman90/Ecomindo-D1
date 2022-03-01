@@ -12,6 +12,8 @@ namespace Ecomindo_D1
             CreateMap<Menu, MenuDTO>();
             CreateMap<RestaurantDTO, Restaurant>();
             CreateMap<Restaurant, RestaurantDTO>();
+            CreateMap<RestaurantWithMenusDTO, Restaurant>();
+            CreateMap<Restaurant, RestaurantWithMenusDTO>();
         }
     }
 }
