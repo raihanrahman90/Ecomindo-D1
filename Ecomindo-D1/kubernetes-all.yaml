@@ -17,8 +17,8 @@ spec:
   template:
     metadata:
       labels:
-          app: ob-net-core-tutorial
-      name: ob-net-core-tutorial
+          app: dotnet
+      name: dotnet
     spec:
       containers:
         - name: dotnet
@@ -28,13 +28,8 @@ spec:
             - name: ConnectionStrings__DefaultConnection
               valueFrom:
                 secretKeyRef:
-                  name: sql-server-yahya
-                  key: on-boarding-skd-db
-            - name: AuthorizationServer__Address
-              valueFrom:
-                configMapKeyRef:
-                  name: config-yahya
-                  key: AuthorizationServerAddress
+                  name: onboarding
+                  key: onboarding-ecom
           ports:
           - containerPort: 80
           resources:
