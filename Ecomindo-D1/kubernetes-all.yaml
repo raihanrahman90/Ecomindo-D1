@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: dotnet-raihan
-          image: muhammadraihan39/onboarding
+          image: muhammadraihan39/onboarding:441
           imagePullPolicy: Always
           env:
             - name: CONTENT_API_URL
