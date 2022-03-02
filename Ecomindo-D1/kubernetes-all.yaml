@@ -2,13 +2,13 @@
 kind: Deployment
 metadata:
   labels:
-      app: dotnet
-  name: dotnet
+      app: dotnet-raihan
+  name: dotnet-raihan
 spec:
   replicas: 1
   selector:
     matchLabels:
-        app: dotnet
+        app: dotnet-raihan
   strategy:
     rollingUpdate:
         maxSurge: 1
@@ -17,11 +17,11 @@ spec:
   template:
     metadata:
       labels:
-          app: dotnet
-      name: dotnet
+          app: dotnet-raihan
+      name: dotnet-raihan
     spec:
       containers:
-        - name: dotnet
+        - name: dotnet-raihan
           image: muhammadraihan39/onboarding
           imagePullPolicy: Always
           env:
@@ -47,13 +47,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: dotnet
-  name: dotnet
+    app: dotnet-raihan
+  name: dotnet-raihan
 spec:
   ports:
   - port: 80
   type: LoadBalancer
   selector:
-    app: dotnet
+    app: dotnet-raihan
 status:
   loadBalancer: {}
