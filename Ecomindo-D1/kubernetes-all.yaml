@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: dotnet
-          image: muhammadraihan39/onboarding
+          image: muhammadraihan39/onboarding:#{Build.BuildId}#
           imagePullPolicy: Always
           env:
             - name: ConnectionStrings__DefaultConnection
