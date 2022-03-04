@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ecomindo_D1.Migrations
 {
-    public partial class init : Migration
+    public partial class addDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,25 +24,25 @@ namespace Ecomindo_D1.Migrations
                 columns: table => new
                 {
                     idMenu = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    idRestaurant = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     namaMenu = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    hargaMenu = table.Column<int>(type: "int", nullable: false),
-                    RestaurantidRestaurant = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    hargaMenu = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Menu", x => x.idMenu);
                     table.ForeignKey(
-                        name: "FK_Menu_Restaurants_RestaurantidRestaurant",
-                        column: x => x.RestaurantidRestaurant,
+                        name: "FK_Menu_Restaurants_idRestaurant",
+                        column: x => x.idRestaurant,
                         principalTable: "Restaurants",
                         principalColumn: "idRestaurant",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Menu_RestaurantidRestaurant",
+                name: "IX_Menu_idRestaurant",
                 table: "Menu",
-                column: "RestaurantidRestaurant");
+                column: "idRestaurant");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

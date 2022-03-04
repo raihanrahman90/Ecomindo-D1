@@ -8,7 +8,6 @@ namespace Ecomindo_D1.Interface
     {
         public IMenuRepository MenuRepository { get; }
         public IRestaurantRepository RestaurantRepository { get; }
-
         void Save();
         Task SaveAsync(CancellationToken cancellationToken = default(CancellationToken));
         IDbContextTransaction StartNewTransaction();

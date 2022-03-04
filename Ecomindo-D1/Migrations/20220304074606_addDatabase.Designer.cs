@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecomindo_D1.Migrations
 {
     [DbContext(typeof(OnBoardingSkdDbContext))]
-    [Migration("20220223062036_init")]
-    partial class init
+    [Migration("20220304074606_addDatabase")]
+    partial class addDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,18 +27,18 @@ namespace Ecomindo_D1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("RestaurantidRestaurant")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("hargaMenu")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("idRestaurant")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("namaMenu")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idMenu");
 
-                    b.HasIndex("RestaurantidRestaurant");
+                    b.HasIndex("idRestaurant");
 
                     b.ToTable("Menu");
                 });
@@ -59,9 +59,13 @@ namespace Ecomindo_D1.Migrations
 
             modelBuilder.Entity("Ecomindo_D1.Model.Menu", b =>
                 {
-                    b.HasOne("Ecomindo_D1.Model.Restaurant", null)
+                    b.HasOne("Ecomindo_D1.Model.Restaurant", "Restaurant")
                         .WithMany("Menus")
-                        .HasForeignKey("RestaurantidRestaurant");
+                        .HasForeignKey("idRestaurant")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("Ecomindo_D1.Model.Restaurant", b =>

@@ -37,7 +37,7 @@ namespace Ecomindo_D1.Services
         }
         public async Task ProcessEventHandler(ProcessEventArgs eventArgs)
         {
-            _logger.LogInformation(Encoding.UTF8.GetString(eventArgs.Data.Body.ToArray()));
+           // _logger.LogInformation(Encoding.UTF8.GetString(eventArgs.Data.Body.ToArray()));
             await eventArgs.UpdateCheckpointAsync(eventArgs.CancellationToken);
         }
 

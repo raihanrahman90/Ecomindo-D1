@@ -17,7 +17,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Ecomindo_D1.Services;
 using Ecomindo_D1.Job;
-
 namespace Ecomindo_D1
 {
     public class Startup
@@ -32,9 +31,9 @@ namespace Ecomindo_D1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+            services.AddHttpContextAccessor();
             services.AddControllers();
 
             services.AddDbContext<OnBoardingSkdDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -42,7 +41,6 @@ namespace Ecomindo_D1
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IRestaurantService, RestaurantService>();
             services.AddScoped<IMenuService, MenuService>();
-
             services.AddHostedService<MenuMessageListener>();
 
             services.AddTransient<LogTimeJob>();
@@ -54,7 +52,32 @@ namespace Ecomindo_D1
             services.AddApplicationInsightsTelemetry();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo{ Title = "Tutorial Net Core", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sample Auth Service", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"JWT Authorization header using the Bearer scheme.
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      Example: 'Bearer 12345abcdef'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement(){
+                {
+                    new OpenApiSecurityScheme{
+                        Reference = new OpenApiReference{
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                            },
+                        Scheme = "oauth2",
+                        Name = "Bearer",
+                        In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                        }
+                });
             });
         }
 
@@ -69,9 +92,8 @@ namespace Ecomindo_D1
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -83,8 +105,8 @@ namespace Ecomindo_D1
             });
 
             var schedulerService = app.ApplicationServices.GetRequiredService<ISchedulerService>();
-            schedulerService.Initialize();
-            schedulerService.Start();
+            //schedulerService.Initialize();
+            //schedulerService.Start();
         }
     }
 }
